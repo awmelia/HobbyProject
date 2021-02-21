@@ -26,16 +26,16 @@ namespace MuscleTrackerApp
         }
 
         /*****************.
-    *  Function             getExercises
+    *  Function             getExerciseTypes
     *   Description         Method that, if successful, returns an sqlDataReader with all associated information from database
     *    Parameters
     *     Returns           SqlDataReader
     ***********/
 
-        public SqlDataReader GetExercises()
+        public SqlDataReader GetExerciseTypes()
         {
             sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Exercise", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM ExerciseType", sqlConnection);
 
             try
             {
@@ -57,6 +57,50 @@ namespace MuscleTrackerApp
 
         }
 
+        /*****************.
+                *  Function             AddExercise
+                *   Description         Method that, if successful, adds an Exercise in the database. 
+                *    Parameters         string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned
+                *     Returns           string with officeNumber
+                ***********/
+
+        public void AddOffice(string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("INSERT INTO Exercise (exerciseTypeName, exerciseName, weightAmount, setsAmount, repsAmount, bodyParts, kcalBurned) VALUES(@exerciseTypeName, @exerciseName, @weightAmount, @setsAmount, @repsAmount, @bodyParts, @kcalBurned) ", sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@exerciseTypeName", exerciseTypeName);
+                    sqlCommand.Parameters.AddWithValue("@exerciseName", exerciseName);
+                    sqlCommand.Parameters.AddWithValue("@weightAmount", weightAmount);
+                    sqlCommand.Parameters.AddWithValue("@setsAmount", setsAmount);
+                    sqlCommand.Parameters.AddWithValue("@repsAmount", repsAmount);
+                    sqlCommand.Parameters.AddWithValue("@bodyParts", bodyParts); 
+                    sqlCommand.Parameters.AddWithValue("@kcalBurned", kcalBurned);
+
+
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException e)
+                    {
+
+                        throw e;
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+
+        }
 
     }
 }
