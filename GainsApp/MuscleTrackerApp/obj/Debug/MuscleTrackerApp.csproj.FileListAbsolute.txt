@@ -1,0 +1,7 @@
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\bin\Debug\MuscleTrackerApp.exe.config
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\bin\Debug\MuscleTrackerApp.exe
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\bin\Debug\MuscleTrackerApp.pdb
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\obj\Debug\MuscleTrackerApp.csprojAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\obj\Debug\MuscleTrackerApp.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\obj\Debug\MuscleTrackerApp.exe
+C:\Users\Administrator\Documents\GitHub\HobbyProject\GainsApp\MuscleTrackerApp\obj\Debug\MuscleTrackerApp.pdb
