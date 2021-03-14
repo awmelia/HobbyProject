@@ -27,7 +27,7 @@ namespace MuscleTrackerApp
 
         /*****************.
     *  Function             getExerciseTypes
-    *   Description         Method that, if successful, returns an sqlDataReader with all associated information from database
+    *   Description         Method that returns an sqlDataReader with all exerciseType from database
     *    Parameters
     *     Returns           SqlDataReader
     ***********/
@@ -58,13 +58,122 @@ namespace MuscleTrackerApp
         }
 
         /*****************.
-                *  Function             AddExercise
-                *   Description         Method that, if successful, adds an Exercise in the database. 
+                *  Function             AddExerciseType
+                *   Description         Method that adds an ExerciseType to the database. 
                 *    Parameters         string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned
                 *     Returns           
                 ***********/
 
-        public void AddËxercise(string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned)
+        public void AddExerciseType(string exerciseTypeName, string withWeights)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("INSERT INTO ExerciseType(exerciseTypeName, repsAmount) " +
+                    "VALUES(@exerciseTypeName, @withWeights) ", sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@exerciseTypeName", exerciseTypeName);
+                    sqlCommand.Parameters.AddWithValue("@withWeights", withWeights);
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException e)
+                    {
+
+                        throw e;
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+
+        }
+
+        /*****************.
+        *  Function             RemoveExerciseType
+        *   Description         Method that removes an ExerciseType from the database.
+        *    Parameters         string exerciseTypeName
+        *     Returns           
+        ***********/
+
+        public void RemoveExerciseType(string exerciseTypeName)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("DELETE FROM ExerciseType WHERE " +
+                    "exerciseTypeName = '" + exerciseTypeName + "'", sqlConnection))
+                {
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException e)
+                    {
+
+                        throw e;
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+
+        }
+
+        /*****************.
+           *  Function             editExerciseType
+           *   Description         Method that edits an ExerciseType within the database.
+           *    Parameters         string exerciseTypeName, string withWeights
+           *      Returns           
+           ***********/
+
+        public void EditExerciseType(string exerciseTypeName, string withWeights)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("UPDATE ExerciseType SET exerciseTypeName = '" + exerciseTypeName + 
+                    "', withWeights = " + withWeights + "'", sqlConnection))
+                {
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException e)
+                    {
+                        throw e;
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+
+        }
+
+        /*****************.
+                *  Function             AddExercise
+                *   Description         Method that adds an Exercise to the database. 
+                *    Parameters         string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned
+                *     Returns           
+                ***********/
+
+        public void AddExercise(string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -105,7 +214,7 @@ namespace MuscleTrackerApp
 
         /*****************.
                 *  Function             GetExercise
-                *   Description         Method that, if successful, returns an sqlDataReader with all associated information from database
+                *   Description         Method that returns an sqlDataReader with all exercises from database
                 *    Parameters         string exerciseTypeName
                 *     Returns           SqlDataReader
              ***********/
@@ -136,12 +245,12 @@ namespace MuscleTrackerApp
 
         /*****************.
    *  Function             RemoveExercise
-   *   Description         Method that, if successful, removes an Exercise from the database.
+   *   Description         Method that removes an Exercise from the database.
    *    Parameters         string exerciseName, string exerciseTypeName
    *     Returns           
    ***********/
 
-        public void RemoveOffice(string exerciseName, string exerciseTypeName)
+        public void RemoveExercise(string exerciseName, string exerciseTypeName)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -173,7 +282,7 @@ namespace MuscleTrackerApp
 
         /*****************.
              *  Function             editExercise
-             *   Description         Method that, if successful, edits an Exercise within the database.
+             *   Description         Method that edits an Exercise within the database.
              *    Parameters         string exerciseTypeName, string exerciseName, int weightAmount, int setsAmount, int repsAmount, string bodyParts, int kcalBurned
              *      Returns           
              ***********/
@@ -189,7 +298,6 @@ namespace MuscleTrackerApp
                     try
                     {
                         sqlConnection.Open();
-                        //int result = - kan användas senare för error handling
                         sqlCommand.ExecuteNonQuery();
 
                     }
